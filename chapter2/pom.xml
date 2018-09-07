@@ -96,6 +96,7 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- 前端jsp所需要的JSTL的依赖 -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
