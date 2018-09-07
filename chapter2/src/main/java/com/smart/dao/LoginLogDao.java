@@ -1,11 +1,13 @@
 package com.smart.dao;
 
 import com.smart.domain.LoginLog;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class LoginLogDao {
+    @Autowired
     private JdbcTemplate jdbcTemplate;
 
     //保存登录日志

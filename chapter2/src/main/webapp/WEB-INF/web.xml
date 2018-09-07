@@ -19,7 +19,8 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
-    <!-- springMVC的主控Servlet -->
+    <!-- springMVC的主控Servlet,需要在WEB-INF有一个 ${serlvet-name}-servlet.xml的springMVC配置文件,
+        并且springMVC的servlet会自动将他和其它spring配置文件进行拼装 -->
     <servlet>
         <servlet-name>smart</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -30,4 +31,5 @@
         <servlet-name>smart</servlet-name>
         <url-pattern>*.html</url-pattern> <!-- 该url都被截获,交由SpringMVC框架处理 -->
     </servlet-mapping>
+
 </web-app>
