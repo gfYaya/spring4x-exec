@@ -38,6 +38,7 @@ public class Chapter3Application extends SpringBootServletInitializer {//Servlet
         return builder.sources(Chapter3Application.class);
     }
 
+    //需要使用maven的spring boot plugins 启动才能正常访问 不知道为什么...
     public static void main(String[] args) {
         SpringApplication.run(Chapter3Application.class, args);
     }
