@@ -38,7 +38,9 @@ public class Chapter3Application extends SpringBootServletInitializer {//Servlet
         return builder.sources(Chapter3Application.class);
     }
 
-    //需要使用maven的spring boot plugins 启动才能正常访问 不知道为什么...
+    //todo 需要使用maven的spring boot plugins 启动才能正常访问 不知道为什么...
+    //https://www.oschina.net/question/2930515_2199881
+    //Added by 海涛:主要是 pom 里面的 tomcat 那个包的问题  => pom.xml , <package> war </> ,打成war包在tomcat下确实好使
     public static void main(String[] args) {
         SpringApplication.run(Chapter3Application.class, args);
     }
