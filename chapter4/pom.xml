@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.smart</groupId>
+    <artifactId>chapter4</artifactId>
+    <version>1.0</version>
+    <name>Spring4.x第四章实例</name>
+
+    <properties>
+        <file.encoding>UTF-8</file.encoding>
+        <spring.version>4.2.2.RELEASE</spring.version>
+        <groovy.version>2.3.6</groovy.version>
+    </properties>
+
+    <dependencies>
+
+        <!-- spring 依赖-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>${groovy.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.8.7</version>
+            <!-- 如果是scope为test 那么只能将单元测试类 写在maven的test/java下面-->
+            <!--
+            <scope>test</scope>
+            -->
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+            <!--
+            <scope>test</scope>
+            -->
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+</project>
