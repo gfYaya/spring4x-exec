@@ -7,8 +7,7 @@
    <bean id="car" class="com.smart.Car"
          p:brand="红旗CA72"
          p:maxSpeed="200"/>
-    <!--
+
    <bean id="myBeanPostProcessor" class="com.smart.context.MyBeanPostProcessor"/>
    <bean id="myBeanFactoryPostProcessor" class="com.smart.context.MyBeanFactoryPostProcessor"/>
-   -->
 </beans>
