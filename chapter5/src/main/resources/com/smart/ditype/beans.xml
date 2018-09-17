@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+    <!-- 属性注入 -->
+    <bean id="car" class="com.smart.ditype.Car">
+        <!-- spring只会检查Bean中是否有对应的Setter方法,至于Bean中是否有对应的属性成员变更则不作要求-->
+        <property name="brand" value="红旗&amp;CA72"/>
+        <property name="maxSpeed" value="200" />
+        <property name="price" value="20000.00" />
+    </bean>
+    <bean id="boss" class="com.smart.ditype.Boss">
+        <property name="car" ref="car"/>
+    </bean>
+
+    <!--
+    <bean id="car" class="com.smart.ditype.Car"
+          p:brand="红旗&amp;CA72"
+          p:maxSpeed="200"
+          p:price="20000.00"/>
+    <bean id="boss" class="com.smart.ditype.Boss"
+          p:car-ref="car"/>
+     -->
+
+
+</beans>
