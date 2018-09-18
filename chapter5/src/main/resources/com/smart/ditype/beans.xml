@@ -26,4 +26,80 @@
      -->
 
 
+    <bean id="car2" class="com.smart.ditype.Car" p:brand="红旗&amp;CA72"
+          p:maxSpeed="200" p:price="100000" />
+
+
+    <bean id="boss2" class="com.smart.ditype.Boss">
+        <property name="name" value="John" />
+        <property name="car" ref="car" />
+    </bean>
+
+
+    <!--构造函数注入：type -->
+    <bean id="car1" class="com.smart.ditype.Car">
+        <!-- Spring的配置文件采用和元素标签顺序无关的策略 -->
+        <constructor-arg type="java.lang.String">
+            <value>红旗CA72</value>
+        </constructor-arg>
+        <constructor-arg type="double">
+            <value>20000</value>
+        </constructor-arg>
+    </bean>
+
+    <!-- 构造函数注入：index
+    <bean id="car2" class="com.smart.ditype.Car">
+        <constructor-arg index="0" value="红旗CA72" />
+        <constructor-argindex="1" value="中国一汽" />
+        <constructor-arg index="2" value="20000" />
+    </bean>
+    -->
+
+    <!--构造函数注入：type&index -->
+    <bean id="car3" class="com.smart.ditype.Car">
+        <constructor-arg index="0" type="java.lang.String">
+            <value>红旗CA72</value>
+        </constructor-arg>
+        <constructor-arg index="1" type="java.lang.String">
+            <value>中国一汽</value>
+        </constructor-arg>
+        <constructor-arg index="2" type="int">
+            <value>200</value>
+        </constructor-arg>
+    </bean>
+    <bean id="car4" class="com.smart.ditype.Car">
+        <constructor-arg index="0">
+            <value>红旗CA72</value>
+        </constructor-arg>
+        <constructor-arg index="1">
+            <value>中国一汽</value>
+        </constructor-arg>
+        <constructor-arg index="2" type="int">
+            <value>200</value>
+        </constructor-arg>
+    </bean>
+
+    <!--构造函数注入：自动识别入参类型 -->
+    <bean id="boss1" class="com.smart.ditype.Boss">
+        <constructor-arg>
+            <value>John</value>
+        </constructor-arg>
+        <constructor-arg>
+            <ref bean="car" />
+        </constructor-arg>
+        <constructor-arg>
+            <ref bean="office" />
+        </constructor-arg>
+    </bean>
+    <bean id="office" class="com.smart.ditype.Office" />
+
+    <!-- 工厂方法注入-->
+    <!-- 非静态工厂方法 -->
+    <bean id="carFactory" class="com.smart.ditype.CarFactory" />
+    <bean id="car5" factory-bean="carFactory" factory-method="createHongQiCar">
+    </bean>
+    <!-- 静态工厂方法 -->
+    <bean id="car6" class="com.smart.ditype.CarFactory"
+          factory-method="createCar"></bean>
+
 </beans>
