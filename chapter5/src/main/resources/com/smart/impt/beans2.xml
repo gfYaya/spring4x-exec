@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	 http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+	<!-- 这个引入的import资源到底是和该beans2.xml是兄弟关系,还是父容器,亦或是子容器?
+	    如果是兄弟容器互相无法看到,显然不符合,这个能看到beans1.xml的bean信息.
+	    result:目前结论,既不是兄弟,也不是父子,等同于一个文件.
+	    即便是不使用import方式,在spring启动的时候,同时分别加载这两个配置文件,以便在内存中合并.
+	  -->
+    <import resource="classpath:com/smart/impt/beans1.xml"/>
+
+	<!--<bean id="boss1" class="com.smart.fb.Boss"
+	   p:name="John" p:car-ref="car1"/>
+	<bean id="boss2" class="com.smart.fb.Boss"
+	   p:name="John" p:car-ref="car2"/>-->
+
+	<bean id="boss1" class="com.smart.fb.Boss">
+		<property name="name">
+			<value>John</value>
+		</property>
+		<property name="car">
+			<ref bean="car1"></ref>
+		</property>
+ 	</bean>
+
+	<bean id="boss2" class="com.smart.fb.Boss">
+		<property name="name">
+			<value>John</value>
+		</property>
+		<property name="car">
+			<ref bean="car2"></ref>
+		</property>
+	</bean>
+
+</beans>
