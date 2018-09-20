@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+         http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+         http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context-4.0.xsd"
+         >
+
+	<!-- spring容器将会扫描这个基类包的里的所有类,并从 类的注解(@Component) 信息获取Bean的定义信息
+		@Repository,@Service,@Controller 与@Component的beam完全等价,只是为了类本身的用途标注清晰化
+	-->
+   <context:component-scan base-package="com.smart.anno"/>
+ <!--  <bean class="com.smart.anno.LogonService"></bean>-->
+   <!-- context:component-scan base-package="com.smart" resource-pattern="anno/*.class"/ -->
+   <context:component-scan base-package="com.smart">
+	   <!-- include 表示要包含的目标类 -->
+       <context:include-filter type="regex" expression="com\.smart\.anno.*Dao"/>
+       <context:include-filter type="regex" expression="com\.smart\.anno.*Service"/>
+	   <!-- excluede 表示要排除的目标类 -->
+       <context:exclude-filter type="aspectj" expression="com.smart..*Controller+"/>
+   </context:component-scan >
+</beans>
