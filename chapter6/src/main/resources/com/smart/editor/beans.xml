@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+    <!-- 配置自动注册属性编辑器的CustomEditorConfigurer.
+        CustomEditorConfigurer实现了BeanFactoryPostProcessor,因而是一个Bean工厂后处理器,与占位符都是交给后处理器处理的. -->
+    <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+        <property name="customEditors">
+            <map>
+                <!-- 属性编辑器对应的属性类型 -->
+                <entry key="com.smart.editor.Car"
+                       value="com.smart.editor.CustomCarEditor"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="boss" class="com.smart.editor.Boss">
+        <property name="name" value="John"/>
+        <!-- 该属性使用上述的属性编辑器完成属性填充操作 -->
+        <property name="car" value="红旗CA72,200,20000.00"/>
+    </bean>
+
+</beans>
