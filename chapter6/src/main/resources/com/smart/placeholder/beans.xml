@@ -6,8 +6,8 @@
          http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
          http://www.springframework.org/schema/context
          http://www.springframework.org/schema/context/spring-context-4.0.xsd">
-	<!-- 1.使用传统的PropertyPlaceholderConfigurer引用属性文件  -->
 
+	<!-- 使用传统的PropertyPlaceholderConfigurer引用属性文件  -->
     <bean
 			class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
 			p:fileEncoding="utf-8">
@@ -19,8 +19,7 @@
 	</bean>
 
 
-	<!-- 2.使用context命名空间的配置引用属性文件  -->
-
+	<!-- 使用context命名空间的配置引用属性文件  -->
     <context:property-placeholder
 		location="classpath:com/smart/placeholder/jdbc.properties" file-encoding="utf8"/>
 	<bean id="utf8" class="java.lang.String">
@@ -28,7 +27,7 @@
 	</bean>
 
 
-	<!-- 3.使用加密版的属性文件  -->
+	<!-- 使用加密版的属性文件  -->
 	<bean class="com.smart.placeholder.EncryptPropertyPlaceholderConfigurer"
 	    p:location="classpath:com/smart/placeholder/jdbc.properties"
 		p:fileEncoding="utf-8"/>
