@@ -30,4 +30,9 @@ public class ForumServiceImpl implements ForumService {
 		//PerformanceMonitor.end();
 	}
 
+	//非接口需要实现的方法,是否被动态代理实现了性能检测方法
+	public void sayHello(){
+        System.out.println("hello");
+    }
+
 }

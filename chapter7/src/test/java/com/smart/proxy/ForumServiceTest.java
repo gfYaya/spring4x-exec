@@ -26,13 +26,16 @@ public class ForumServiceTest {
 				target.getClass().getInterfaces(), handler);
 		proxy.removeForum(10);
 		proxy.removeTopic(1012);
+		//非接口待实现的方法无法使用,对象上转型,所以没有sayHello
 
 		//使用CGLib动态代理
-//		CglibProxy cglibProxy = new CglibProxy();
-//		ForumService forumService2 = (ForumService)cglibProxy.getProxy(ForumServiceImpl.class);
-//		forumService2.removeForum(10);
-//		forumService2.removeTopic(1023);
-		
+		CglibProxy cglibProxy = new CglibProxy();
+		//通过动态生成子类的方式创建代理类
+		//ForumService forumService2 = (ForumService)cglibProxy.getProxy(ForumServiceImpl.class);
+        ForumServiceImpl forumService2 = (ForumServiceImpl)cglibProxy.getProxy(ForumServiceImpl.class);
+		forumService2.removeForum(10);
+		forumService2.removeTopic(1023);
+        forumService2.sayHello();//在cglib中,sayHello()这个非ForumService接口的方法也被进行了增强
 	}
 	 
 }

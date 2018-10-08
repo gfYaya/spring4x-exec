@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+     http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+	<bean id="greetingBefore" class="com.smart.advice.GreetingBeforeAdvice" />
+	<bean id="greetingAfter" class="com.smart.advice.GreetingAfterAdvice" />
+	<!--
+	<bean id="greetingAdvice" class="com.smart.advice.GreetingBeforeAdvice" />
+	-->
+	<bean id="greetingAround" class="com.smart.advice.GreetingInterceptor" />
+
+	<!-- 代理的目标对象 -->
+	<bean id="target" class="com.smart.advice.NaiveWaiter" />
+
+	<!-- greetingAdvice -->
+	<bean id="waiter1"
+		class="org.springframework.aop.framework.ProxyFactoryBean"
+		p:proxyInterfaces="com.smart.advice.Waiter" p:target-ref="target"
+		p:interceptorNames="greetingBefore"/>
+
+	<!-- 使用proxyTargetClass 是采用cglib增强代理,无需使用proxyInterfaces -->
+	<bean id="waiter11"
+		  class="org.springframework.aop.framework.ProxyFactoryBean"
+		  p:target-ref="target"
+		  p:interceptorNames="greetingBefore"
+	      p:proxyTargetClass="true"/>
+
+	<!-- before and after advice -->
+	<bean id="waiter2"
+		class="org.springframework.aop.framework.ProxyFactoryBean"
+		p:proxyInterfaces="com.smart.advice.Waiter"
+		p:target-ref="target"
+		p:interceptorNames="greetingBefore,greetingAfter" />
+
+    <!-- around advice -->
+	<bean id="waiter3" class="org.springframework.aop.framework.ProxyFactoryBean"
+		p:proxyInterfaces="com.smart.advice.Waiter" p:target-ref="target"
+		p:interceptorNames="greetingAround" />
+
+
+	<!-- 异常抛出增强  -->
+	<bean id="forumServiceTarget" class="com.smart.advice.ForumService" />
+	<bean id="transactionManager" class="com.smart.advice.TransactionManager" />
+
+	<bean id="forumService" class="org.springframework.aop.framework.ProxyFactoryBean"
+	  p:interceptorNames="transactionManager"
+	  p:target-ref="forumServiceTarget"
+	  p:proxyTargetClass="true"/>
+
+</beans>
