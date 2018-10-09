@@ -14,7 +14,8 @@
 	<bean id="greetingAdvisor" class="com.smart.advisor.GreetingAdvisor"
 		p:advice-ref="greetingAdvice" />
 
-	<bean id="parent" abstract="true"
+	<bean id="parent"
+		  abstract="true"
 		class="org.springframework.aop.framework.ProxyFactoryBean"
 		p:interceptorNames="greetingAdvisor" p:proxyTargetClass="true" />
 	<bean id="waiter" parent="parent" p:target-ref="waiterTarget" />
@@ -25,9 +26,9 @@
 	<bean id="regexpAdvisor"
 		class="org.springframework.aop.support.RegexpMethodPointcutAdvisor"
 		p:advice-ref="greetingAdvice">
-		<property name="patterns">
+		<property name="patterns"> <!-- 用正则表达式定义目标类全限定方法名的匹配模式串 -->
 			<list>
-				<value>.*greet.*</value>
+				<value>.*greet.*</value> <!-- 匹配模式串,匹配Waiter.greetTo() -->
 			</list>
 		</property>
 	</bean>
@@ -38,10 +39,10 @@
 
 	<!-- 动态切面 -->
 	<bean id="dynamicAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
-		<property name="pointcut">
+		<property name="pointcut"> <!-- 个人理解:PointCut是切点,相当于过滤条件,即什么情况执行advice的中的增强实现 -->
 			<bean class="com.smart.advisor.GreetingDynamicPointcut" />
 		</property>
-		<property name="advice">
+		<property name="advice"> <!-- 个人理解:匹配到pointcut的切点,便执行下面的增强 -->
 			<bean class="com.smart.advisor.GreetingBeforeAdvice" />
 		</property>
 	</bean>
@@ -54,11 +55,12 @@
 	<!-- 控制流程切面 -->
 	<bean id="controlFlowPointcut" class="org.springframework.aop.support.ControlFlowPointcut">
 		<constructor-arg type="java.lang.Class"
-			value="com.smart.advisor.WaiterDelegate" />
-		<constructor-arg type="java.lang.String" value="service" />
+			value="com.smart.advisor.WaiterDelegate" /> <!-- 指定流程切点的类 -->
+		<constructor-arg type="java.lang.String" value="service" /> <!-- 指定流程切点的方法 -->
 	</bean>
 	<bean id="controlFlowAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor"
-		p:pointcut-ref="controlFlowPointcut" p:advice-ref="greetingAdvice" />
+		p:pointcut-ref="controlFlowPointcut"
+		p:advice-ref="greetingAdvice" />
 	<bean id="waiter3" class="org.springframework.aop.framework.ProxyFactoryBean"
 		p:interceptorNames="controlFlowAdvisor" p:target-ref="waiterTarget"
 		p:proxyTargetClass="true" />
