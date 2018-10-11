@@ -19,11 +19,13 @@ public class BeanSelfProxyAwareMounter implements SystemBootAddon, ApplicationCo
 
     private ApplicationContext applicationContext;
 
+    //注入Spring容器
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
        this.applicationContext = applicationContext;
     }
 
-    public void onReady() {
+    public void onReady() { //实现系统启动器接口中的装配就绪的方法
+        //从容器中获取所有注入的自动代理的Bean
         Map<String, BeanSelfProxyAware> proxyAwareMap =
                 applicationContext.getBeansOfType(BeanSelfProxyAware.class);
         if(proxyAwareMap!=null){
