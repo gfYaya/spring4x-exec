@@ -67,8 +67,10 @@
 
 	<!-- 复合切点切面 -->
 	<bean id="gcp" class="com.smart.advisor.GreetingComposablePointcut" />
+	<!-- 引用gcp.intersectionPointcut()方法所返回的复合切点 -->
 	<bean id="composableAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor"
 		p:pointcut="#{gcp.intersectionPointcut}" p:advice-ref="greetingAdvice" />
+	<!-- 使用复合切点切面 -->
 	<bean id="waiter4" class="org.springframework.aop.framework.ProxyFactoryBean"
 		p:interceptorNames="composableAdvisor" p:target-ref="waiterTarget"
 		p:proxyTargetClass="true" />
