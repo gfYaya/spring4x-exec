@@ -1,4 +1,4 @@
-package com.smart.advisor;
+package com.smart.autoproxy;
 
 
 import com.smart.aop.BeanSelfProxyAware;
@@ -12,6 +12,7 @@ public class Waiter implements BeanSelfProxyAware {
 
 	public void serveTo(String name){
 		System.out.println("waiter serving "+name+"...");
+		waiter.greetTo(name);
 	}
 
 	public void greetTo(String name) {
