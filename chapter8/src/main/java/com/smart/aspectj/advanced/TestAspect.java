@@ -57,6 +57,7 @@ public class TestAspect {
 
   //------------绑定代理对象----------//
 	//@Before("execution(* greetTo(..)) && this(waiter)")
+	//通过bindProxyObj(..)函数的参数列表 获取到this()中的waiter的具体类型为com.smart.Waiter,也是同名入参的增强方式
 	@Before("this(waiter)")
 	public void bindProxyObj(Waiter waiter){
 	   System.out.println("----bindProxyObj()----");
