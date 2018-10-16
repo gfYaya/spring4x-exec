@@ -1,6 +1,9 @@
 package com.smart;
 
+import com.smart.anno.NeedTest;
+
 public class NaughtyWaiter implements Waiter {
+	@NeedTest
 	public void greetTo(String clientName) {
 		System.out.println("NaughtyWaiter:greet to "+clientName+"...");
 	}	

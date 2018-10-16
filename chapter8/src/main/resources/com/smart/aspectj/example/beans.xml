@@ -11,6 +11,9 @@
 	<bean id="waiter" class="com.smart.NaiveWaiter" />
 	<!-- 使用了@AspectJ注解的切面类 -->
 	<bean class="com.smart.aspectj.example.PreGreetingAspect" />
+
+    <!-- todo 与<aop:aspectj-autoproxy>作用一样 -->
 	<!-- 自动代理创建器,自动将@AspectJ注解切面类织入目标Bean中 -->
-	<bean class="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator"/>
+	<!--bean class="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator"/-->
+
 </beans>
