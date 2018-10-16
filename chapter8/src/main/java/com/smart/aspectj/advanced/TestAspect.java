@@ -12,41 +12,41 @@ public class TestAspect {
 	public void notServeInNaiveWaiter() {
 		System.out.println("--notServeInNaiveWaiter() executed!--");
 	}
-	@After("within(com.smart.*) "
-			+ " && execution(* greetTo(..)))")
+
+	@After("within(com.smart.*)  && execution(* greetTo(..)))")
 	public void greeToFun() {
 		System.out.println("--greeToFun() executed!--");
 	}
 
-	@AfterReturning("target(com.smart.Waiter) || "+
-			        " target(com.smart.Seller)")
+	@AfterReturning("target(com.smart.Waiter) || target(com.smart.Seller)")
 	public void waiterOrSeller(){
 		System.out.println("--waiterOrSeller() executed!--");
 	}
 
-	//------------引用命名切点----------//
+	//------------引用命名切点---------- TestNamePointcut.java   //
 	@Before("TestNamePointcut.inPkgGreetTo()")
 	public void pkgGreetTo(){
 		System.out.println("--pkgGreetTo() executed!--");
 	}
 
-	@Before("!target(com.smart.NaiveWaiter) && "
-			+"TestNamePointcut.inPkgGreetTo()")
+	@Before("!target(com.smart.NaiveWaiter) && TestNamePointcut.inPkgGreetTo()")
 	public void pkgGreetToNotNaiveWaiter(){
 		System.out.println("--pkgGreetToNotNaiveWaiter() executed!--");
 	}
 
     //------------访问连接点对象----------//
-	@Around("execution(* greetTo(..)) && target(com.smart.NaiveWaiter)")
-	public void joinPointAccess(ProceedingJoinPoint pjp) throws Throwable{
+	@Around("execution(* greetTo(..)) && target(com.smart.NaiveWaiter)") //环绕增强
+	public void joinPointAccess(ProceedingJoinPoint pjp) throws Throwable{ //声明连接点入参
 		System.out.println("------joinPointAccess-------");
 		System.out.println("args[0]:"+pjp.getArgs()[0]);
 		System.out.println("signature:"+pjp.getTarget().getClass());
+		//通过连接点执行目标对象的方法
 		pjp.proceed();
 		System.out.println("-------joinPointAccess-------");
 	}
 
   //------------绑定连接点参数----------//
+	//args中的参数名称与该函数的参数列表的名称一一对应,增强方法可以通过name和num访问到连接点的方法入参
 	@Before("target(com.smart.NaiveWaiter) && args(name,num,..)")
 	public void bindJoinPointParams(int num,String name){
 	   System.out.println("----bindJoinPointParams()----");

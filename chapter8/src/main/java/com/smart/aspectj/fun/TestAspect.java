@@ -68,12 +68,12 @@ public class TestAspect implements Ordered{
 		System.out.println("atWithinTest() executed!");
 	}
 
-	@AfterReturning("this(com.smart.Seller)")
+	@AfterReturning("this(com.smart.Seller)") //this匹配引介增强的代理对象的所有方法,而target却不行
 	public void thisTest(){
 		System.out.println("thisTest() executed!");
 	}
 
 	public int getOrder() {
-		return 1;
+		return 1;  //顺序号小的优先织入
 	}
 }
