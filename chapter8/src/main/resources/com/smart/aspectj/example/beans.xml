@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+	<!-- 基于@AspectJ切面的驱动器,自动匹配@Aspect切面的Bean创建代理 -->
+    <aop:aspectj-autoproxy proxy-target-class="false"/> <!-- 默认为false,表示JDK动态代理,若为true则是cglib -->
+	<!-- 目标Bean
+	   todo 关键是测试类也未指定factory.setTarget(target),spring怎么知道我只是指定这个bean,并对他进行增强-->
+	<bean id="waiter" class="com.smart.NaiveWaiter" />
+	<!-- 使用了@AspectJ注解的切面类 -->
+	<bean class="com.smart.aspectj.example.PreGreetingAspect" />
+	<!-- 自动代理创建器,自动将@AspectJ注解切面类织入目标Bean中 -->
+	<bean class="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator"/>
+</beans>
