@@ -4,7 +4,7 @@
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
-	<aop:aspectj-autoproxy/>
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
 	<bean id="naiveWaiter" class="com.smart.NaiveWaiter" />
 	<bean id="naughtyWaiter" class="com.smart.NaughtyWaiter" />
 	<bean id="seller" class="com.smart.SmartSeller" />
