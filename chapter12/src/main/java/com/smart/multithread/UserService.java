@@ -1,5 +1,6 @@
 package com.smart.multithread;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.context.ApplicationContext;
@@ -13,6 +14,8 @@ import org.apache.commons.dbcp.BasicDataSource;
  */
 @Service("userService")
 public class UserService extends BaseService {
+    final static Logger logger = Logger.getLogger(UserService.class);
+
     private JdbcTemplate jdbcTemplate;
     private ScoreService scoreService;
 
@@ -64,6 +67,8 @@ public class UserService extends BaseService {
     }
 
     public static void main(String[] args) {
+        logger.debug("aaaa");
+        logger.info("sss");
         ApplicationContext ctx = new ClassPathXmlApplicationContext("com/smart/multithread/applicatonContext.xml");
         UserService service = (UserService) ctx.getBean("userService");
 
