@@ -67,8 +67,6 @@ public class UserService extends BaseService {
     }
 
     public static void main(String[] args) {
-        logger.debug("aaaa");
-        logger.info("sss");
         ApplicationContext ctx = new ClassPathXmlApplicationContext("com/smart/multithread/applicatonContext.xml");
         UserService service = (UserService) ctx.getBean("userService");
 
