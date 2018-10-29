@@ -35,7 +35,7 @@ public class TestPostDao extends AbstractTransactionalTestNGSpringContextTests {
 	
     @Test
     public void testgetAttach() throws Throwable{
-    	FileOutputStream fos = new FileOutputStream("d:/temp.jpg");
+    	FileOutputStream fos = new FileOutputStream("c:/temp.jpg");//c盘无论如何都不好使
     	postDao.getAttach(1,fos);
     }
     

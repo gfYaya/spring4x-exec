@@ -30,7 +30,7 @@ public class PostDao {
 
 	private LobHandler lobHandler;
 
-	private DataFieldMaxValueIncrementer incre;
+	private DataFieldMaxValueIncrementer incre;//主键值生成器,同一JVM实现了获取主键的同步,分布式下需要自己实现CAS锁
 
 	@Autowired
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
@@ -57,7 +57,7 @@ public class PostDao {
 				    //ps.setInt(1,1);
 		    	  
 		    	    //通过自增键指定主键值
-					//PreparedStatement绑定参数的时候,参数索引从1开始而不是0,第一个参数索引是1
+					//todo PreparedStatement绑定参数的时候,参数索引从1开始而不是0,第一个参数索引是1
 		    	    ps.setInt(1, incre.nextIntValue());
 					ps.setInt(2, post.getUserId());	
 					lobCreator.setClobAsString(ps, 3, post.getPostText());
@@ -70,8 +70,9 @@ public class PostDao {
 	public void getNativeConn(){
 		try {
 			Connection conn = DataSourceUtils.getConnection(jdbcTemplate.getDataSource());
+			//使用模板类的本地JDBC抽取器获取本地连接
 			conn = jdbcTemplate.getNativeJdbcExtractor().getNativeConnection(conn);
-			//OracleConnection oconn = (OracleConnection) conn;
+			//OracleConnection oconn = (OracleConnection) conn; //可以强制进行类型转换
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -85,6 +86,7 @@ public class PostDao {
 					public Post mapRow(ResultSet rs, int rowNum)
 							throws SQLException {
 						int postId = rs.getInt(1);
+						//以二进制数组方式获取blob数据
 						byte[] attach = lobHandler.getBlobAsBytes(rs, 2);
 						Post post = new Post();
 						post.setPostId(postId);
@@ -104,6 +106,7 @@ public class PostDao {
 					}
 	                   
 				public void streamData(ResultSet rs) throws SQLException,IOException {
+						//以流式处理,可以减少内存占用
 						InputStream is = lobHandler.getBlobAsBinaryStream(rs, 1);
 						if (is != null) {
 							FileCopyUtils.copy(is, os);

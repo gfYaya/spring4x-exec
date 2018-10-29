@@ -25,6 +25,8 @@
 	      <constructor-arg ref="dataSource"/>
 	</bean>      
 
+
+	<!-- NativeJdbcExtractor需要通过运行期的反射机制获取底层的JDBC对象,所以需要尽量避免启动时就实例化这两个Bean -->
 	<bean id="nativeJdbcExtractor"
 		class="org.springframework.jdbc.support.nativejdbc.CommonsDbcpNativeJdbcExtractor"
 		lazy-init="true" />
