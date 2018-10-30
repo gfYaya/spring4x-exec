@@ -19,8 +19,10 @@
     <bean id="lobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler"
           lazy-init="true"/>
 
+    <!-- 通过AnnotationSessionFactoryBean定义sessionFactory,通过实体类注解获取orm配置信息.
+        也可以混合使用xml和注解配置对象关系映射 -->
     <bean id="sessionFactory"
-          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
+          class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
           p:dataSource-ref="dataSource">
         <property name="packagesToScan" value="com.smart.domain"/>
         <property name="hibernateProperties">
@@ -42,6 +44,7 @@
     <bean id="transactionManager"
           class="org.springframework.orm.hibernate4.HibernateTransactionManager"
           p:sessionFactory-ref="sessionFactory"/>
+    <!-- 默认查找transactionManager的事务管理器,无须显示指定 -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
 </beans>

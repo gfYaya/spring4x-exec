@@ -46,6 +46,16 @@
                 </prop>
             </props>
         </property>
+        <!-- hibnernate事件监听 -->
+        <!-- todo 下面的写法有问题,必须是hibernate3才支持eventListeners属性,并且IdTransferringMergeEventListener 也是h3才有的
+           https://blog.csdn.net/zhang289202241/article/details/68485007-->
+        <!--<property name="eventListeners">-->
+            <!--<map>-->
+                <!--<entry key="merge">-->
+                    <!--<bean class="org.springframework.orm.hibernate4.support.IdTransferringMergeEventListener"></bean>-->
+                <!--</entry>-->
+            <!--</map>-->
+        <!--</property>-->
     </bean>
 
 
@@ -56,7 +66,7 @@
     <!-- bean id="sessionFactory"
           class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
           p:dataSource-ref="dataSource"
-          p:mappingDirectoryLocations="classpath:/com/smart/domain">
+          p:mappingDirectoryLocations="classpath:/com/smart/domain/**/*.hbm.xml">
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">

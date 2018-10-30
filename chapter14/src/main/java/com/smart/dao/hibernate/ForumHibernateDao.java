@@ -14,13 +14,16 @@ import com.smart.domain.Forum;
 public class ForumHibernateDao extends BaseDao {
 
 	public void addForum(Forum forum) {
+		//保存实体对象
 		getHibernateTemplate().save(forum);
 	}
 
+	//更改实体对象
 	public void updateForum(Forum forum) {
 		getHibernateTemplate().update(forum);
 	}
 
+	//获取实体对象
 	public Forum getForum(int forumId) {
 		return getHibernateTemplate().get(Forum.class, forumId);
 	}

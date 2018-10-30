@@ -4,6 +4,7 @@
     "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<settings>
+		<!-- 懒加载 -->
 		<setting name="lazyLoadingEnabled" value="false" />
 	</settings>
 	<typeAliases>
@@ -11,4 +12,13 @@
 		<typeAlias alias="Topic" type="com.smart.domain.Topic" />
 		<typeAlias alias="Post" type="com.smart.domain.Post" />
 	</typeAliases>
+
+	<!-- applicationContext-mybatis.xml中的sqlSessionFactory配置了mapperLocations,所以可以省略,不在这里面配置mappers -->
+	<!--
+	<mappers>
+		<mapper resource="com/smart/domain/mybatis/Forum.xml"/>
+		<mapper resource="com/smart/domain/mybatis/Post.xml"/>
+		<mapper resource="com/smart/domain/mybatis/Topic.xml"/>
+	</mappers>
+	-->
 </configuration>
