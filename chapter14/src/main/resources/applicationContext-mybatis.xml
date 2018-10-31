@@ -31,6 +31,7 @@
         <constructor-arg ref="sqlSessionFactory"/>
     </bean>
 
+    <!-- 如此配置,可以将mybatis的映射接口自动转换为spring的bean,不需要sessionTemplate.getMapper(ForumMybatisDao.class)这种方式获取实例 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
           p:sqlSessionFactory-ref="sqlSessionFactory"
           p:basePackage="com.smart.dao.mybatis"/>

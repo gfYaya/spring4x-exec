@@ -22,8 +22,10 @@ public class ForumMybatisTemplateDao {
     }
 
     public Forum getForum2(int forumId) {
-        ForumMybatisDao forumMybatisDao =
-                sessionTemplate.getMapper(ForumMybatisDao.class);
+        /* 获取接口实例,如果mybatis中的spring 配置文件applicationContext-mybatis.xml中配置了
+         * org.mybatis.spring.mapper.MapperScannerConfigurer,那么会自动扫描,将这些映射接口
+         * 转换为spring的Bean,可以直接用于service */
+        ForumMybatisDao forumMybatisDao = sessionTemplate.getMapper(ForumMybatisDao.class);
         return forumMybatisDao.getForum(forumId);
     }
 }

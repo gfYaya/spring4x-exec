@@ -15,6 +15,8 @@ public class BaseDao<T> {
     public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
         this.hibernateTemplate = hibernateTemplate;
     }
+
+    //泛型类型
    private Class entityClass;
    
    public BaseDao(){
