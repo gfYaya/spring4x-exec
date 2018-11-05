@@ -8,9 +8,12 @@
     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
 
-<bean id="timerTask"
-		class="com.smart.basic.timer.SimpleTimerTask" />
-		
+	<bean id="timerTask" class="com.smart.basic.timer.SimpleTimerTask" />
+
+	<!-- spring4已经不推荐org.springframework.scheduling.timer.ScheduledTimerTask这个类，
+	所以不能用spring3以前的timerTask方法。现spring4定时器方法推荐一下两只方法：（需要单独导入quartz包，只能是1.8.+）
+	原文：https://blog.csdn.net/u010994277/article/details/43835945
+	-->
 	<bean id="scheduledTask"
 		  class="org.springframework.scheduling.timer.ScheduledTimerTask"
 		  p:delay="10000"
