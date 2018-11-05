@@ -7,6 +7,6 @@
     http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
     <cache:annotation-driven/>
     <context:component-scan base-package="com.smart.cache.guava"/>
-
+    <!-- 这个类存在,但是不知道为什么xml无法识别 -->
     <bean id="cacheManager" class="org.springframework.cache.guava.GuavaCacheManager" />
 </beans>

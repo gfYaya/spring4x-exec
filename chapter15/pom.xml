@@ -8,11 +8,13 @@
     <version>1.0</version>
     <name>Spring4.x第十五章实例</name>
     <dependencies>
-        <dependency>
-            <groupId>javax.cache</groupId>
-            <artifactId>cache-api</artifactId>
-            <version>0.3</version>
-        </dependency>
+        <!-- 版本太低,使用spring-context-support子pom的 cache-api包即可,不注释会替代掉子pom文件的依赖 -->
+        <!--<dependency>-->
+            <!--<groupId>javax.cache</groupId>-->
+            <!--<artifactId>cache-api</artifactId>-->
+            <!--<version>0.3</version>-->
+        <!--</dependency>-->
+
         <dependency>
             <groupId>com.hazelcast</groupId>
             <artifactId>hazelcast-all</artifactId>
@@ -51,6 +53,12 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <!-- 额外添加的 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
             <version>${spring.version}</version>
         </dependency>
 
