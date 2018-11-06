@@ -52,6 +52,7 @@ public class UserController {
 	   也会自动映射到该pojo的属性中.与createUser(userId,userName,password....) 是一致的,
 	   @RequestBody 与@ReponseBody都是依赖HttpMessageConverter:
 	   Strategy interface that specifies a converter that can convert from and to HTTP requests and responses.
+	   warning:接口设计风格为Rest风格,get请求下,如果后台接收参数的注解是@RequestBody会报错;如果是post请求,使用@RequestParam注解接收参数会报错
 	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView createUser(User user) {
