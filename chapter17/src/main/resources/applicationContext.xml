@@ -8,7 +8,14 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd">
 
-<context:component-scan base-package="com.smart">
+    <!-- applicationContext.xml的bean交给ApplicationContext管理,业务层Spring IOC容器,而web-inf下的smart-servlet.xml中的bean交给
+        WebApplicationContext 这个spring IOC容器,属于web层容器,可以配置多个DispatcherServlet容器(Spring IOC web层容器),都为上述的
+        业务层容器的子容器,子容器Web容器可以引用父容器业务层的引用,反之不行.兄弟容器之间无法互相引用.
+        todo 如果applicationContext.xml的bean交给ApplicationContext管理,而session,global session,request这几个scope 却是
+        其ctx子类WebApplicationContext的,那么applicationContext.xml是否具备可以将bean 设置为 session这几个作用域呢?
+     -->
+
+    <context:component-scan base-package="com.smart">
        <context:exclude-filter type="aspectj" expression="com.smart..web.*"/>
     </context:component-scan>
 
@@ -17,5 +24,4 @@
     </websocket:handlers>
 
     <bean id="helloHandler" class="com.smart.web.MyWebSocketHandler"/>
-
 </beans>

@@ -164,7 +164,6 @@
     <mvc:default-servlet-handler/>
     <bean id="rpe" class="com.smart.web.ResourcePathExposer"
           init-method="init"/>
-    <mvc:resources mapping="#{rpe.resourceRoot}/**"
-                   location="/" cache-period="31536000"/>
+    <mvc:resources mapping="#{rpe.resourceRoot}/**" location="/" cache-period="31536000"/>
 
 </beans>
