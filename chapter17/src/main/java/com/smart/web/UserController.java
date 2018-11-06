@@ -47,6 +47,10 @@ public class UserController {
 		this.userService = userService;
 	}
 
+	/* JSON,XML等特殊的请求体，需要messageconvert特殊转换。这种方式是从 request.getInputStream 读取.而不是像普通的Servlet规范中获取属性
+	   request.getParameter("xxx")方式获取.所以当请求是xml,json的时候需要使用@ReuqestBody,否则自动映射到参数列表中,即便参数是一个pojo,
+	   也会自动映射到该pojo的属性中.与createUser(userId,userName,password....) 是一致的
+	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView createUser(User user) {
 		userService.createUser(user);
