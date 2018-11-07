@@ -194,16 +194,15 @@ public class UserController {
 	// return mav;
 	// }
 
-	@RequestMapping(value = "/handle41")
+	@RequestMapping(value = "/handle41") //@RequestBody选择与之对应的泛型为String类型,所以StringHttpMessageConverter
 	public String handle41(@RequestBody String body) {
 		System.out.println(body);
 		return "success";
 	}
 
-	@ResponseBody
+	@ResponseBody //因为smart-servlet.xml的bean messageConverters配置了多个HttpMessageConverter的实现类,所以会直接查找ByteArrayHttpMessageConverter根据函数的返回类型以响应@ResponseBody
 	@RequestMapping(value = "/handle42/{imageId}")
-	public byte[] handle42(@PathVariable("imageId") String imageId)
-			throws IOException {
+	public byte[] handle42(@PathVariable("imageId") String imageId) throws IOException {
 		System.out.println("load image of " + imageId);
 		Resource res = new ClassPathResource("/image.jpg");
 		byte[] fileData = FileCopyUtils.copyToByteArray(res.getInputStream());
@@ -226,7 +225,7 @@ public class UserController {
 				fileData, HttpStatus.OK);
 		return responseEntity;
 	}
-
+	// HttpEntity<?>与@RequestBody/@ResponseBody 可以访问请求/响应的报文体和报文头,spring MVC就是根据HttpEntity的反省类型查找对应的HTTPMassageConverter
 	@RequestMapping(value = "/handle51")
 	public ResponseEntity<User> handle51(HttpEntity<User> requestEntity) {
 		User user = requestEntity.getBody();
