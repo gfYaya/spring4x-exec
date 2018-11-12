@@ -226,6 +226,7 @@ public class UserController {
 		return responseEntity;
 	}
 	// HttpEntity<?>与@RequestBody/@ResponseBody 可以访问请求/响应的报文体和报文头,spring MVC就是根据HttpEntity的反省类型查找对应的HTTPMassageConverter
+	//@RequestMapping(value = "/handle51",headers = "Accept=application/xml" ,produces = "application/xml") //依然无效
 	@RequestMapping(value = "/handle51")
 	public ResponseEntity<User> handle51(HttpEntity<User> requestEntity) {
 		User user = requestEntity.getBody();

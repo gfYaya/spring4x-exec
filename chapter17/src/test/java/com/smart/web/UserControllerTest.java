@@ -4,6 +4,7 @@ import com.smart.domain.User;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
+import org.springframework.http.*;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
 import org.springframework.oxm.xstream.XStreamMarshaller;
@@ -17,6 +18,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.util.Collections;
 
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
 public class UserControllerTest  extends AbstractTransactionalTestNGSpringContextTests {
@@ -61,32 +63,35 @@ public class UserControllerTest  extends AbstractTransactionalTestNGSpringContex
         FileCopyUtils.copy(response, outFile.getFile());
     }
 
-//    @Test
-//    public void testhandle51WithXml() {
-//
-//        RestTemplate restTemplate = buildRestTemplate();
-//
-//        User user = new User();
-//        user.setUserName("tom");
-//        user.setPassword("1234");
-//        user.setRealName("汤姆");
-//
-//        HttpHeaders entityHeaders = new HttpHeaders();
-//        entityHeaders.setContentType(MediaType.valueOf("application/xml;UTF-8"));
-//        entityHeaders.setAccept(Collections.singletonList(MediaType.APPLICATION_XML));
-//        HttpEntity<User> requestEntity = new HttpEntity<User>(user, entityHeaders);
-//
-//
-//        ResponseEntity<User> responseEntity = restTemplate.exchange(
-//                "http://localhost:8080/chapter17/user/handle51.html",
-//                HttpMethod.POST, requestEntity, User.class);
-//
-//        User responseUser = responseEntity.getBody();
-//        Assert.assertNotNull(responseUser);
-//        Assert.assertEquals("1000", responseUser.getUserId());
-//        Assert.assertEquals("tom", responseUser.getUserName());
-//        Assert.assertEquals("汤姆", responseUser.getRealName());
-//    }
+    //todo 这个测试用例无法运行 无法找到与响应相对应的的HttpMessageConverter
+    @Test
+    public void testhandle51WithXml() {
+
+        RestTemplate restTemplate = buildRestTemplate();
+
+        User user = new User();
+        user.setUserName("tom");
+        user.setPassword("1234");
+        user.setRealName("汤姆");
+
+        HttpHeaders entityHeaders = new HttpHeaders();
+        entityHeaders.setContentType(MediaType.valueOf("application/xml;UTF-8"));
+        entityHeaders.setAccept(Collections.singletonList(MediaType.APPLICATION_XML));
+        HttpEntity<User> requestEntity = new HttpEntity<User>(user, entityHeaders);
+
+
+        ResponseEntity<User> responseEntity = restTemplate.exchange(
+                //"http://localhost:8080/chapter17/user/handle51.html",
+                "http://localhost:8080/chapter17/user/handle51",
+                //HttpMethod.POST, requestEntity, User.class); //@RequestMapping默认是get? POST不行?
+                HttpMethod.GET, requestEntity, User.class);
+
+        User responseUser = responseEntity.getBody();
+        Assert.assertNotNull(responseUser);
+        Assert.assertEquals("1000", responseUser.getUserId());
+        Assert.assertEquals("tom", responseUser.getUserName());
+        Assert.assertEquals("汤姆", responseUser.getRealName());
+    }
 
     private RestTemplate buildRestTemplate() {
         RestTemplate restTemplate = new RestTemplate();
